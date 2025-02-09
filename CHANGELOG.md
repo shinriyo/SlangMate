@@ -1,6 +1,12 @@
 # Changelog
 
-## [1.0.1] - 2025-02-09
+## [1.0.2] - 2025-02-10
+### Changed
+- Added dynamic plugin support
+- Improved settings configuration UI
+- Updated plugin display names for better clarity
+
+## [1.0.1] - 2025-02-10
 ### Fixed
 - Removed deprecated API usage
 - Updated JVM target to 17
