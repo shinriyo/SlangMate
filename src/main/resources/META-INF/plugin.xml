@@ -54,7 +54,9 @@
         <applicationService 
             serviceImplementation="com.shinriyo.slangmate.PluginSettings"
             dynamic="true"/>
-        <applicationConfigurable instance="com.shinriyo.slangmate.SettingsConfigurable"
-                                 displayName="PluginSettings"/>
+        <applicationConfigurable 
+            instance="com.shinriyo.slangmate.SettingsConfigurable"
+            displayName="CSV Download Settings"
+            dynamic="true"/>
     </extensions>
 </idea-plugin>
