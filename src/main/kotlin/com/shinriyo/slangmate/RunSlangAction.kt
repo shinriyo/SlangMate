@@ -9,13 +9,13 @@ import java.io.InputStreamReader
 
 class RunSlangAction : AnAction("Run Slang") {
     override fun actionPerformed(e: AnActionEvent) {
-        val project: Project? = e.project ?: return
+        val project: Project = e.project ?: return
 
         val command = listOf("fvm", "flutter", "pub", "run", "slang")
 
         try {
             val processBuilder = ProcessBuilder(command)
-                .directory(project?.basePath?.let { java.io.File(it) }) // プロジェクトのルートで実行
+                .directory(project.basePath?.let { java.io.File(it) }) // プロジェクトのルートで実行
                 .redirectErrorStream(true) // 標準エラーも含める
 
             val process = processBuilder.start()

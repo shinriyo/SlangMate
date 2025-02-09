@@ -4,12 +4,10 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
-import com.shinriyo.slangmate.PluginSettings
 import com.intellij.openapi.options.ShowSettingsUtil
 import java.io.File
 import java.net.HttpURLConnection
 import java.net.URI
-import java.net.URL
 
 class DownloadCsvAction : AnAction("Download CSV") {
     override fun actionPerformed(e: AnActionEvent) {
@@ -45,7 +43,7 @@ class DownloadCsvAction : AnAction("Download CSV") {
                 val csvData = connection.inputStream.bufferedReader().readText()
 
                 // プロジェクトのベースパスを取得
-                val projectBasePath = project?.basePath ?: return
+                val projectBasePath = project.basePath ?: return
                 val fullFilePath = "$projectBasePath/$filePath"
 
                 val file = File(fullFilePath)
