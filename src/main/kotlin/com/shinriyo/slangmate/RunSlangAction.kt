@@ -1,42 +1,49 @@
 package com.shinriyo.slangmate
 
-import com.intellij.execution.ExecutionManager
-import com.intellij.execution.configurations.GeneralCommandLine
-import com.intellij.execution.process.ProcessHandler
-import com.intellij.execution.ui.ConsoleView
-import com.intellij.execution.ui.ConsoleViewContentType
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.execution.impl.ConsoleViewImpl
 import com.intellij.openapi.project.Project
-import java.io.OutputStream
-import com.intellij.execution.process.OSProcessHandler
+import com.intellij.openapi.ui.Messages
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
-@Suppress("DialogTitleCapitalization")
-class RunSlangAction : AnAction() {
-    init {
-        templatePresentation.text = "Run slang"
-        templatePresentation.description = "Run slang command"
-    }
-
+class RunSlangAction : AnAction("Run Slang") {
     override fun actionPerformed(e: AnActionEvent) {
-        val project: Project = e.project ?: return
+        val project: Project? = e.project ?: return
 
         val command = listOf("fvm", "flutter", "pub", "run", "slang")
 
         try {
-            val commandLine = GeneralCommandLine(command)
-                .withWorkDirectory(project?.basePath) // プロジェクトのルートディレクトリで実行
+            val processBuilder = ProcessBuilder(command)
+                .directory(project?.basePath?.let { java.io.File(it) }) // プロジェクトのルートで実行
+                .redirectErrorStream(true) // 標準エラーも含める
 
-            val processHandler = OSProcessHandler(commandLine)
-            val consoleView: ConsoleView = ConsoleViewImpl(project, false)
-            consoleView.print("> ${command.joinToString(" ")}\n", ConsoleViewContentType.SYSTEM_OUTPUT)
+            val process = processBuilder.start()
 
-            consoleView.attachToProcess(processHandler)
-            processHandler.startNotify()
+            // 結果を取得
+            val reader = BufferedReader(InputStreamReader(process.inputStream))
+            val output = StringBuilder()
+            var line: String?
+            while (reader.readLine().also { line = it } != null) {
+                output.append(line).append("\n")
+            }
+            val exitCode = process.waitFor()
 
+            // 成功か失敗かを判定
+            if (exitCode == 0) {
+                Messages.showInfoMessage(
+                    project,
+                    "Slang execution completed successfully.\n${output}",
+                    "Success"
+                )
+            } else {
+                Messages.showErrorDialog(
+                    "Slang execution failed.\nClick 'Details' to see full error output.",
+                    "Error"
+                )
+            }
         } catch (ex: Exception) {
-            println("エラー: ${ex.message}")
+            Messages.showErrorDialog("An error occurred: ${ex.message}", "Error")
         }
     }
 }
