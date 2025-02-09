@@ -16,8 +16,8 @@ class DownloadCsvAction : AnAction("Download CSV") {
         val project: Project = e.project ?: return
 
         // 設定からspreadSheetIDとファイルパスを取得
-        val spreadSheetId = PluginSettings.instance.spreadSheetId
-        val filePath = PluginSettings.instance.filePath
+        val spreadSheetId = PluginSettings.getInstance().spreadSheetId
+        val filePath = PluginSettings.getInstance().filePath
 
        // spreadSheetId が空の場合、「はい」「いいえ」ダイアログを表示
        if (spreadSheetId.isBlank()) {

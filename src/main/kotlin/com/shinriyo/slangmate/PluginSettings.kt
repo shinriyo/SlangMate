@@ -3,6 +3,7 @@ package com.shinriyo.slangmate
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
+import com.intellij.openapi.components.service
 
 @State(name = "CsvDownloadSettings", storages = [Storage("csv_download_settings.xml")])
 class PluginSettings : PersistentStateComponent<PluginSettings.State> {
@@ -28,7 +29,6 @@ class PluginSettings : PersistentStateComponent<PluginSettings.State> {
     }
 
     companion object {
-        val instance: PluginSettings
-            get() = com.intellij.openapi.components.ServiceManager.getService(PluginSettings::class.java)
+        fun getInstance(): PluginSettings = service()
     }
 }
