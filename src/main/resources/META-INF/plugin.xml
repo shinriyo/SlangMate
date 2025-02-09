@@ -24,7 +24,7 @@
     <!-- Actions: メニューに表示するアクションを定義 -->
     <actions>
         <!-- CSVダウンロードボタン -->
-        <action id="com.shinriyo.SlangMate.DownloadCsvAction"
+        <action id="com.shinriyo.slangMate.DownloadCsvAction"
                 class="com.shinriyo.slangmate.DownloadCsvAction"
                 text="Download CSV"
                 description="Download CSV from Google Spreadsheet">
@@ -32,10 +32,18 @@
         </action>
 
         <!-- slang コマンド実行ボタン -->
-        <action id="com.shinriyo.SlangMate.RunSlangAction"
+        <action id="com.shinriyo.slangMate.RunSlangAction"
                 class="com.shinriyo.slangmate.RunSlangAction"
                 text="Run Slang"
                 description="Run 'fvm flutter pub run slang'">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+
+        <!-- 設定画面を開くボタン -->
+        <action id="com.shinriyo.slangMate.OpenSettingsAction"
+                class="com.shinriyo.slangmate.OpenSettingsAction"
+                text="Open CSV Download Settings"
+                description="Open SlangMate settings">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
     </actions>
@@ -43,6 +51,7 @@
     <!-- Plugin Extension Points -->
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.shinriyo.slangmate.PluginSettings"/>
-        <applicationConfigurable instance="com.shinriyo.slangmate.SettingsConfigurable"/>
+        <applicationConfigurable instance="com.shinriyo.slangmate.SettingsConfigurable"
+                                 displayName="PluginSettings"/>
     </extensions>
 </idea-plugin>

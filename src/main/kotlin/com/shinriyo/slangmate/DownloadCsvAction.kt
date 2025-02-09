@@ -8,6 +8,7 @@ import com.shinriyo.slangmate.PluginSettings
 import com.intellij.openapi.options.ShowSettingsUtil
 import java.io.File
 import java.net.HttpURLConnection
+import java.net.URI
 import java.net.URL
 
 class DownloadCsvAction : AnAction("Download CSV") {
@@ -37,7 +38,7 @@ class DownloadCsvAction : AnAction("Download CSV") {
         val url = "https://docs.google.com/spreadsheets/d/$spreadSheetId/export?format=csv"
 
         try {
-            val connection = URL(url).openConnection() as HttpURLConnection
+            val connection = URI(url).toURL().openConnection() as HttpURLConnection
             connection.requestMethod = "GET"
 
             if (connection.responseCode == HttpURLConnection.HTTP_OK) {
