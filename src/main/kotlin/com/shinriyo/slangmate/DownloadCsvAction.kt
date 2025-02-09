@@ -9,7 +9,14 @@ import java.io.File
 import java.net.HttpURLConnection
 import java.net.URI
 
-class DownloadCsvAction : AnAction("Download CSV") {
+class DownloadCsvAction : AnAction() {
+    init {
+        templatePresentation.apply {
+            text = "Download CSV"
+            description = "Download CSV file from Google Sheets"
+        }
+    }
+
     override fun actionPerformed(e: AnActionEvent) {
         val project: Project = e.project ?: return
 

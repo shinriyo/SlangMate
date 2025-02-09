@@ -7,7 +7,14 @@ import com.intellij.openapi.ui.Messages
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class RunSlangAction : AnAction("Run Slang") {
+class RunSlangAction : AnAction() {
+    init {
+        templatePresentation.apply {
+            text = "Run Slang"
+            description = "Execute slang command"
+        }
+    }
+    
     override fun actionPerformed(e: AnActionEvent) {
         val project: Project = e.project ?: return
 

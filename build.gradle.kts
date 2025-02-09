@@ -32,6 +32,7 @@ tasks {
         kotlinOptions {
             jvmTarget = "17"
             languageVersion = "1.9"
+            freeCompilerArgs += "-Xsuppress-deprecated-warnings"
         }
     }
 
