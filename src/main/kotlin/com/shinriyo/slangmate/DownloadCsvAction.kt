@@ -5,6 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.shinriyo.slangmate.PluginSettings
+import com.intellij.openapi.options.ShowSettingsUtil
 import java.io.File
 import java.net.HttpURLConnection
 import java.net.URL
@@ -17,10 +18,19 @@ class DownloadCsvAction : AnAction("Download CSV") {
         val spreadSheetId = PluginSettings.instance.spreadSheetId
         val filePath = PluginSettings.instance.filePath
 
-        // spreadSheetId が空の場合はエラーダイアログを表示
-        if (spreadSheetId.isBlank()) {
-            Messages.showErrorDialog("Google Sheets IDが設定されていません。\n設定画面から入力してください。",
-                "エラー: Google Sheets ID 未設定")
+       // spreadSheetId が空の場合、「はい」「いいえ」ダイアログを表示
+       if (spreadSheetId.isBlank()) {
+            val result = Messages.showYesNoDialog(
+                "Google Sheets ID が設定されていません。\n設定画面を開きますか？",
+                "エラー: Google Sheets ID 未設定",
+                "はい",
+                "いいえ",
+                Messages.getErrorIcon()
+            )
+        
+            if (result == Messages.YES) {
+                ShowSettingsUtil.getInstance().showSettingsDialog(project, "CSV Download Settings")
+            }
             return
         }
 
