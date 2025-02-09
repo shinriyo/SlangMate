@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <idea-plugin>
     <id>com.shinriyo.SlangMate</id>
     <name>SlangMate</name>
@@ -18,7 +19,6 @@
 
     📌 **Enhance your Flutter internationalization (i18n) workflow with ease!**
 ]]></description>
-
 
     <depends>com.intellij.modules.platform</depends>
 
@@ -51,7 +51,9 @@
 
     <!-- Plugin Extension Points -->
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.shinriyo.slangmate.PluginSettings"/>
+        <applicationService 
+            serviceImplementation="com.shinriyo.slangmate.PluginSettings"
+            dynamic="true"/>
         <applicationConfigurable instance="com.shinriyo.slangmate.SettingsConfigurable"
                                  displayName="PluginSettings"/>
     </extensions>
