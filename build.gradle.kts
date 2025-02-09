@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.shinriyo"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -29,7 +29,11 @@ tasks {
         targetCompatibility = "17"
     }
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "17"
+        kotlinOptions {
+            jvmTarget = "17"
+            languageVersion = "1.9"
+            freeCompilerArgs += "-Xsuppress-deprecated-warnings"
+        }
     }
 
     patchPluginXml {

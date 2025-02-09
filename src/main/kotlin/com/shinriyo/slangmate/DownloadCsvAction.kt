@@ -4,20 +4,25 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
-import com.shinriyo.slangmate.PluginSettings
 import com.intellij.openapi.options.ShowSettingsUtil
 import java.io.File
 import java.net.HttpURLConnection
 import java.net.URI
-import java.net.URL
 
-class DownloadCsvAction : AnAction("Download CSV") {
+class DownloadCsvAction : AnAction() {
+    init {
+        templatePresentation.apply {
+            text = "Download CSV"
+            description = "Download CSV file from Google Sheets"
+        }
+    }
+
     override fun actionPerformed(e: AnActionEvent) {
         val project: Project = e.project ?: return
 
         // 設定からspreadSheetIDとファイルパスを取得
-        val spreadSheetId = PluginSettings.instance.spreadSheetId
-        val filePath = PluginSettings.instance.filePath
+        val spreadSheetId = PluginSettings.getInstance().spreadSheetId
+        val filePath = PluginSettings.getInstance().filePath
 
        // spreadSheetId が空の場合、「はい」「いいえ」ダイアログを表示
        if (spreadSheetId.isBlank()) {
@@ -45,7 +50,7 @@ class DownloadCsvAction : AnAction("Download CSV") {
                 val csvData = connection.inputStream.bufferedReader().readText()
 
                 // プロジェクトのベースパスを取得
-                val projectBasePath = project?.basePath ?: return
+                val projectBasePath = project.basePath ?: return
                 val fullFilePath = "$projectBasePath/$filePath"
 
                 val file = File(fullFilePath)
