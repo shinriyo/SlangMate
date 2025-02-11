@@ -13,6 +13,7 @@ class RunSlangAction : AnAction() {
             text = "Run Slang"
             description = "Execute slang command"
         }
+        
     }
     
     override fun actionPerformed(e: AnActionEvent) {

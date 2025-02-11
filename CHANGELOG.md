@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3] - 2025-02-11
+### Changed
+- Extended IDE compatibility range to support 2025.1
+- Updated Kotlin and Gradle plugin versions
+- Improved plugin description and documentation
+- Enhanced dynamic plugin support
+
 ## [1.0.2] - 2025-02-10
 ### Changed
 - Added dynamic plugin support
