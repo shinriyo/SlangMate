@@ -24,30 +24,39 @@
 
     <!-- Actions: メニューに表示するアクションを定義 -->
     <actions>
-        <!-- CSVダウンロードボタン -->
+        <!-- SlangMate メニューを Tools に追加 -->
+        <group id="SlangMate.Menu"
+               text="SlangMate"
+               description="Tools for SlangMate"
+               popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </group>
+
+        <!-- SlangMate の中に Download CSV を追加 -->
         <action id="com.shinriyo.slangMate.DownloadCsvAction"
                 class="com.shinriyo.slangmate.DownloadCsvAction"
-                text="SlangMate - Download CSV"
+                text="Download CSV"
                 description="Download CSV from Google Spreadsheet">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="SlangMate.Menu" anchor="last"/>
         </action>
 
         <!-- slang コマンド実行ボタン -->
         <action id="com.shinriyo.slangMate.RunSlangAction"
                 class="com.shinriyo.slangmate.RunSlangAction"
-                text="SlangMate - Run Slang"
+                text="Run Slang"
                 description="Run 'fvm flutter pub run slang'">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="SlangMate.Menu" anchor="last"/>
         </action>
 
         <!-- 設定画面を開くボタン -->
         <action id="com.shinriyo.slangMate.OpenSettingsAction"
                 class="com.shinriyo.slangmate.OpenSettingsAction"
-                text="SlangMate - Open Settings"
+                text="Open Settings"
                 description="Open SlangMate settings">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="SlangMate.Menu" anchor="last"/>
         </action>
     </actions>
+
 
     <!-- Plugin Extension Points -->
     <extensions defaultExtensionNs="com.intellij">
