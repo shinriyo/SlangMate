@@ -3,7 +3,7 @@
     <id>com.shinriyo.SlangMate</id>
     <name>SlangMate</name>
     <vendor email="shinriyo@gmail.com" url="https://shinriyo.hateblo.jp/">shinriyo</vendor>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <description><![CDATA[
     <strong>SlangMate</strong> is an Android Studio plugin that simplifies localization workflows by downloading translation data from Google Sheets and executing the Flutter <code>slang</code> command with a single click.<br><br>

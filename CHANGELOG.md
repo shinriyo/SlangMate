@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.4] - 2025-02-11
+### Added
+- Added FVM support with checkbox in settings
+- Created dedicated SlangMate submenu in Tools menu
+### Changed
+- Improved settings UI layout
+- Enhanced plugin description and documentation
+- Updated Kotlin and Gradle dependencies
+
 ## [1.0.3] - 2025-02-11
 ### Changed
 - Extended IDE compatibility range to support 2025.1
