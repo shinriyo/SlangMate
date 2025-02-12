@@ -22,9 +22,9 @@
 
     <depends>com.intellij.modules.platform</depends>
 
-    <!-- Actions: メニューに表示するアクションを定義 -->
+    <!-- Actions: Define actions to be displayed in the menu -->
     <actions>
-        <!-- SlangMate メニューを Tools に追加 -->
+        <!-- Add SlangMate menu to Tools -->
         <group id="SlangMate.Menu"
                text="SlangMate"
                description="Tools for SlangMate"
@@ -32,7 +32,7 @@
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </group>
 
-        <!-- SlangMate の中に Download CSV を追加 -->
+        <!-- Add Download CSV to SlangMate -->
         <action id="com.shinriyo.slangMate.DownloadCsvAction"
                 class="com.shinriyo.slangmate.DownloadCsvAction"
                 text="Download CSV"
@@ -40,7 +40,7 @@
             <add-to-group group-id="SlangMate.Menu" anchor="last"/>
         </action>
 
-        <!-- slang コマンド実行ボタン -->
+        <!-- Run slang command button -->
         <action id="com.shinriyo.slangMate.RunSlangAction"
                 class="com.shinriyo.slangmate.RunSlangAction"
                 text="Run Slang"
@@ -48,7 +48,7 @@
             <add-to-group group-id="SlangMate.Menu" anchor="last"/>
         </action>
 
-        <!-- 設定画面を開くボタン -->
+        <!-- Open settings button -->
         <action id="com.shinriyo.slangMate.OpenSettingsAction"
                 class="com.shinriyo.slangmate.OpenSettingsAction"
                 text="Open Settings"
