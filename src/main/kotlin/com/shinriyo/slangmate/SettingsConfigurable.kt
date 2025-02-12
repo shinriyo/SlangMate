@@ -11,7 +11,7 @@ class SettingsConfigurable : Configurable {
     private var settingsPanel: JPanel? = null
     private var spreadSheetIdField: JTextField? = null
     private var filePathField: JTextField? = null
-    private var useFvmCheckbox: JCheckBox? = null  // 🔥 FVM用チェックボックス追加
+    private var useFvmCheckbox: JCheckBox? = null  // add FVM checkbox
     private val settings = PluginSettings.getInstance()
 
     override fun createComponent(): JComponent {
@@ -56,7 +56,7 @@ class SettingsConfigurable : Configurable {
 
             gbc.gridx = 1
             gbc.weightx = 1.0
-            useFvmCheckbox = JCheckBox("", settings.useFvm)  // 設定から状態を取得
+            useFvmCheckbox = JCheckBox("", settings.useFvm)  // get the state from settings
             settingsPanel!!.add(useFvmCheckbox, gbc)
 
             gbc.gridx = 0
@@ -72,13 +72,13 @@ class SettingsConfigurable : Configurable {
     override fun isModified(): Boolean {
         return spreadSheetIdField?.text?.trim() != settings.spreadSheetId ||
                 filePathField?.text?.trim() != settings.filePath ||
-                useFvmCheckbox?.isSelected != settings.useFvm  // 🔥 FVMのチェックボックスも比較
+                useFvmCheckbox?.isSelected != settings.useFvm  // compare FVM checkbox
     }
 
     override fun apply() {
         val newSpreadSheetId = spreadSheetIdField?.text?.trim() ?: ""
         val newFilePath = filePathField?.text?.trim() ?: ""
-        val newUseFvm = useFvmCheckbox?.isSelected ?: false  // 🔥 チェックボックスの値を取得
+        val newUseFvm = useFvmCheckbox?.isSelected ?: false  // the value of the checkbox
 
         // check spread sheet id
         if (!isValidSpreadsheetId(newSpreadSheetId)) {
@@ -89,10 +89,10 @@ class SettingsConfigurable : Configurable {
             return // stop saving
         }
 
-        // 🔥 設定を保存                                                                                      
+        // save settings                                                                                      
         settings.spreadSheetId = newSpreadSheetId
         settings.filePath = newFilePath
-        settings.useFvm = newUseFvm  // 🔥 FVMの設定を保存
+        settings.useFvm = newUseFvm  // save FVM settings
     }
 
     override fun getDisplayName(): String {

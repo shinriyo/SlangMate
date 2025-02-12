@@ -10,12 +10,12 @@ class PluginSettings : PersistentStateComponent<PluginSettings.State> {
 
     var spreadSheetId: String = ""  // default is empty
     var filePath: String = "lib/i18n/strings.i18n.csv"  // default save path
-    var useFvm: Boolean = false  // 🔥 追加: FVMを使うかどうか
+    var useFvm: Boolean = false  // use FVM or not
 
     class State {
         var spreadSheetId: String = ""  // default is empty
         var filePath: String = "lib/i18n/strings.i18n.csv"
-        var useFvm: Boolean = false  // 🔥 追加: チェックボックスの状態
+        var useFvm: Boolean = false  // the state of the checkbox
     }
 
     override fun getState(): State {

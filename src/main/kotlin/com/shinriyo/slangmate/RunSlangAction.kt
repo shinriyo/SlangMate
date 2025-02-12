@@ -17,7 +17,7 @@ class RunSlangAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val project: Project = e.project ?: return
 
-        // 🔥 FVMの有無をチェック
+        // check if FVM is used
         val useFvm = PluginSettings.getInstance().useFvm
         val command = if (useFvm) {
             listOf("fvm", "flutter", "pub", "run", "slang")
