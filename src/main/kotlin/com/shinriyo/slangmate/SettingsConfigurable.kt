@@ -5,7 +5,7 @@ import javax.swing.*
 import com.intellij.openapi.components.service
 import com.intellij.openapi.ui.Messages
 import java.net.HttpURLConnection
-import java.net.URL
+import java.net.URI
 import java.awt.*
 
 class SettingsConfigurable : Configurable {
@@ -19,13 +19,14 @@ class SettingsConfigurable : Configurable {
             settingsPanel = JPanel(GridBagLayout())
             val gbc = GridBagConstraints().apply {
                 fill = GridBagConstraints.HORIZONTAL
-                insets = Insets(5, 5, 5, 5)
+                insets = Insets(0, 5, 5, 5)
+                anchor = GridBagConstraints.NORTHWEST
             }
 
-            // Google Sheets ID 行
             gbc.gridx = 0
             gbc.gridy = 0
             gbc.weightx = 0.0
+            gbc.weighty = 0.0
             settingsPanel!!.add(JLabel("Google Sheets ID:"), gbc)
 
             gbc.gridx = 1
@@ -35,7 +36,6 @@ class SettingsConfigurable : Configurable {
             }
             settingsPanel!!.add(spreadSheetIdField, gbc)
 
-            // ファイルパス行
             gbc.gridx = 0
             gbc.gridy = 1
             gbc.weightx = 0.0
@@ -47,6 +47,12 @@ class SettingsConfigurable : Configurable {
                 preferredSize = Dimension(300, preferredSize.height)
             }
             settingsPanel!!.add(filePathField, gbc)
+
+            gbc.gridx = 0
+            gbc.gridy = 2
+            gbc.gridwidth = 2
+            gbc.weighty = 1.0
+            settingsPanel!!.add(Box.createVerticalGlue(), gbc)
         }
 
         return settingsPanel!!
@@ -88,7 +94,7 @@ class SettingsConfigurable : Configurable {
 
         val url = "https://docs.google.com/spreadsheets/d/$spreadsheetId/export?format=csv"
         return try {
-            val connection = URL(url).openConnection() as HttpURLConnection
+            val connection = URI(url).toURL().openConnection() as HttpURLConnection
             connection.requestMethod = "GET"
             connection.connectTimeout = 5000 // 5秒タイムアウト
             connection.responseCode == HttpURLConnection.HTTP_OK
