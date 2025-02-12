@@ -12,13 +12,18 @@ class RunSlangAction : AnAction() {
         templatePresentation.apply {
             description = "Execute slang command"
         }
-        
     }
-    
+
     override fun actionPerformed(e: AnActionEvent) {
         val project: Project = e.project ?: return
 
-        val command = listOf("fvm", "flutter", "pub", "run", "slang")
+        // 🔥 FVMの有無をチェック
+        val useFvm = PluginSettings.getInstance().useFvm
+        val command = if (useFvm) {
+            listOf("fvm", "flutter", "pub", "run", "slang")
+        } else {
+            listOf("flutter", "pub", "run", "slang")
+        }
 
         try {
             val processBuilder = ProcessBuilder(command)
