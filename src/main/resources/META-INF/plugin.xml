@@ -14,8 +14,8 @@
 
     🎯 <strong>How to use:</strong><br>
     1️⃣ Open <code>Settings → CSV Download Settings</code> and enter your Google Sheets ID<br>
-    2️⃣ Run <strong>"Download CSV"</strong> from the <code>Tools</code> menu to save the file in the specified path<br>
-    3️⃣ Run <strong>"Run slang"</strong> from the <code>Tools</code> menu to generate localization code instantly<br><br>
+    2️⃣ Run <strong>"SlangMate - Download CSV"</strong> from the <code>Tools</code> menu to save the file in the specified path<br>
+    3️⃣ Run <strong>"SlangMate - Run slang"</strong> from the <code>Tools</code> menu to generate localization code instantly<br><br>
 
     📌 **Enhance your Flutter internationalization (i18n) workflow with ease!**
 ]]></description>
@@ -27,7 +27,7 @@
         <!-- CSVダウンロードボタン -->
         <action id="com.shinriyo.slangMate.DownloadCsvAction"
                 class="com.shinriyo.slangmate.DownloadCsvAction"
-                text="Download CSV"
+                text="SlangMate - Download CSV"
                 description="Download CSV from Google Spreadsheet">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
@@ -35,7 +35,7 @@
         <!-- slang コマンド実行ボタン -->
         <action id="com.shinriyo.slangMate.RunSlangAction"
                 class="com.shinriyo.slangmate.RunSlangAction"
-                text="Run Slang"
+                text="SlangMate - Run Slang"
                 description="Run 'fvm flutter pub run slang'">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
@@ -43,7 +43,7 @@
         <!-- 設定画面を開くボタン -->
         <action id="com.shinriyo.slangMate.OpenSettingsAction"
                 class="com.shinriyo.slangmate.OpenSettingsAction"
-                text="Open CSV Download Settings"
+                text="SlangMate - Open Settings"
                 description="Open SlangMate settings">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
@@ -51,12 +51,12 @@
 
     <!-- Plugin Extension Points -->
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService 
-            serviceImplementation="com.shinriyo.slangmate.PluginSettings"
-            dynamic="true"/>
-        <applicationConfigurable 
-            instance="com.shinriyo.slangmate.SettingsConfigurable"
-            displayName="CSV Download Settings"
-            dynamic="true"/>
+        <applicationService
+                serviceImplementation="com.shinriyo.slangmate.PluginSettings"
+        />
+        <applicationConfigurable
+                instance="com.shinriyo.slangmate.SettingsConfigurable"
+                displayName="CSV Download Settings"
+                dynamic="true"/>
     </extensions>
 </idea-plugin>

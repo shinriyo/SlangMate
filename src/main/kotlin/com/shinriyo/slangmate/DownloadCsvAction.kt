@@ -12,7 +12,6 @@ import java.net.URI
 class DownloadCsvAction : AnAction() {
     init {
         templatePresentation.apply {
-            text = "Download CSV"
             description = "Download CSV file from Google Sheets"
         }
     }

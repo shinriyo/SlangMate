@@ -10,7 +10,6 @@ import java.io.InputStreamReader
 class RunSlangAction : AnAction() {
     init {
         templatePresentation.apply {
-            text = "Run Slang"
             description = "Execute slang command"
         }
         
