@@ -8,11 +8,11 @@ import com.intellij.openapi.components.service
 @State(name = "CsvDownloadSettings", storages = [Storage("csv_download_settings.xml")])
 class PluginSettings : PersistentStateComponent<PluginSettings.State> {
 
-    var spreadSheetId: String = ""  // デフォルトを空にする
-    var filePath: String = "lib/i18n/strings.i18n.csv"  // デフォルトの保存先
+    var spreadSheetId: String = ""  // default is empty
+    var filePath: String = "lib/i18n/strings.i18n.csv"  // default save path
 
     class State {
-        var spreadSheetId: String = ""  // デフォルトを空にする
+        var spreadSheetId: String = ""  // default is empty
         var filePath: String = "lib/i18n/strings.i18n.csv"
     }
 

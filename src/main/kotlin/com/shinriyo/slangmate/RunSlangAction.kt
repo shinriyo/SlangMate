@@ -23,12 +23,12 @@ class RunSlangAction : AnAction() {
 
         try {
             val processBuilder = ProcessBuilder(command)
-                .directory(project.basePath?.let { java.io.File(it) }) // プロジェクトのルートで実行
-                .redirectErrorStream(true) // 標準エラーも含める
+                .directory(project.basePath?.let { java.io.File(it) }) // execute in project root
+                .redirectErrorStream(true) // include standard error
 
             val process = processBuilder.start()
 
-            // 結果を取得
+            // get result
             val reader = BufferedReader(InputStreamReader(process.inputStream))
             val output = StringBuilder()
             var line: String?
@@ -37,7 +37,7 @@ class RunSlangAction : AnAction() {
             }
             val exitCode = process.waitFor()
 
-            // 成功か失敗かを判定
+            // check success or failure
             if (exitCode == 0) {
                 Messages.showInfoMessage(
                     project,

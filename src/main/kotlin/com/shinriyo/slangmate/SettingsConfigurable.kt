@@ -67,16 +67,16 @@ class SettingsConfigurable : Configurable {
         val newSpreadSheetId = spreadSheetIdField?.text?.trim() ?: ""
         val newFilePath = filePathField?.text?.trim() ?: ""
 
-        // スプレッドシートIDのチェック                                                   
+        // check spread sheet id
         if (!isValidSpreadsheetId(newSpreadSheetId)) {                                    
             Messages.showErrorDialog(                                                     
                 "Google Sheets ID が無効です。\n正しい ID を入力してください。",          
                 "エラー: 無効な Google Sheets ID"                                         
             )                                                                             
-            return // 保存を中断                                                          
+            return // stop saving
         }
                                                                                           
-        // ID が正しい場合のみ保存                                                        
+        // save if spread sheet id is valid                                                        
         settings.spreadSheetId = newSpreadSheetId                                         
         settings.filePath = newFilePath
     }
@@ -86,17 +86,17 @@ class SettingsConfigurable : Configurable {
     }
 
     /**
-     * Google Sheets ID の有効性をチェック
-     * @return 正常なら true, 無効なら false
+     * Chedck of valid of Google Sheets ID
+     * @return true if valid, false if invalid
      */
     private fun isValidSpreadsheetId(spreadsheetId: String): Boolean {
-        if (spreadsheetId.isBlank()) return false // 空なら無効
+        if (spreadsheetId.isBlank()) return false // if blank, invalid
 
         val url = "https://docs.google.com/spreadsheets/d/$spreadsheetId/export?format=csv"
         return try {
             val connection = URI(url).toURL().openConnection() as HttpURLConnection
             connection.requestMethod = "GET"
-            connection.connectTimeout = 5000 // 5秒タイムアウト
+            connection.connectTimeout = 5000 // 5 seconds timeout
             connection.responseCode == HttpURLConnection.HTTP_OK
         } catch (e: Exception) {
             false
