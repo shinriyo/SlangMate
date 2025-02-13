@@ -6,6 +6,7 @@ import com.intellij.openapi.ui.Messages
 import java.net.HttpURLConnection
 import java.net.URI
 import java.awt.*
+import com.intellij.ide.BrowserUtil
 
 class SettingsConfigurable : Configurable {
     private var settingsPanel: JPanel? = null
@@ -29,12 +30,25 @@ class SettingsConfigurable : Configurable {
             gbc.weighty = 0.0
             settingsPanel!!.add(JLabel(SlangMateBundle.message("settings.spreadsheet.id")), gbc)
 
+            val idPanel = JPanel(FlowLayout(FlowLayout.LEFT, 0, 0))
+            spreadSheetIdField = JTextField(settings.spreadSheetId).apply {
+                preferredSize = Dimension(250, preferredSize.height)
+            }
+            idPanel.add(spreadSheetIdField)
+
+            val openButton = JButton(SlangMateBundle.message("settings.open.sheet")).apply {
+                addActionListener {
+                    val id = spreadSheetIdField?.text?.trim() ?: ""
+                    if (id.isNotEmpty()) {
+                        BrowserUtil.browse("https://docs.google.com/spreadsheets/d/$id")
+                    }
+                }
+            }
+            idPanel.add(openButton)
+
             gbc.gridx = 1
             gbc.weightx = 1.0
-            spreadSheetIdField = JTextField(settings.spreadSheetId).apply {
-                preferredSize = Dimension(300, preferredSize.height)
-            }
-            settingsPanel!!.add(spreadSheetIdField, gbc)
+            settingsPanel!!.add(idPanel, gbc)
 
             gbc.gridx = 0
             gbc.gridy = 1
@@ -48,7 +62,7 @@ class SettingsConfigurable : Configurable {
             }
             settingsPanel!!.add(filePathField, gbc)
 
-            // 🔥 FVMのチェックボックスを追加
+            // fvm checkbox
             gbc.gridx = 0
             gbc.gridy = 2
             gbc.weightx = 0.0
@@ -59,7 +73,7 @@ class SettingsConfigurable : Configurable {
             useFvmCheckbox = JCheckBox("", settings.useFvm)  // get the state from settings
             settingsPanel!!.add(useFvmCheckbox, gbc)
 
-            // FVMの説明を追加
+            // fvm description
             gbc.gridx = 1
             gbc.gridy = 3
             gbc.weightx = 1.0
@@ -67,7 +81,7 @@ class SettingsConfigurable : Configurable {
             fvmDescription.font = fvmDescription.font.deriveFont(Font.ITALIC)
             settingsPanel!!.add(fvmDescription, gbc)
 
-            // 残りのスペースを下部に押し出す
+            // push the rest of the space to the bottom
             gbc.gridx = 0
             gbc.gridy = 4
             gbc.gridwidth = 2
