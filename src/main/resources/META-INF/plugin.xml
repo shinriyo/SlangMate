@@ -3,7 +3,7 @@
     <id>com.shinriyo.SlangMate</id>
     <name>SlangMate</name>
     <vendor email="shinriyo@gmail.com" url="https://shinriyo.hateblo.jp/">shinriyo</vendor>
-    <version>1.0.2</version>
+    <version>1.0.4</version>
 
     <description><![CDATA[
     <strong>SlangMate</strong> is an Android Studio plugin that simplifies localization workflows by downloading translation data from Google Sheets and executing the Flutter <code>slang</code> command with a single click.<br><br>
@@ -14,49 +14,58 @@
 
     🎯 <strong>How to use:</strong><br>
     1️⃣ Open <code>Settings → CSV Download Settings</code> and enter your Google Sheets ID<br>
-    2️⃣ Run <strong>"Download CSV"</strong> from the <code>Tools</code> menu to save the file in the specified path<br>
-    3️⃣ Run <strong>"Run slang"</strong> from the <code>Tools</code> menu to generate localization code instantly<br><br>
+    2️⃣ Run <strong>"SlangMate - Download CSV"</strong> from the <code>Tools</code> menu to save the file in the specified path<br>
+    3️⃣ Run <strong>"SlangMate - Run slang"</strong> from the <code>Tools</code> menu to generate localization code instantly<br><br>
 
     📌 **Enhance your Flutter internationalization (i18n) workflow with ease!**
 ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
 
-    <!-- Actions: メニューに表示するアクションを定義 -->
+    <!-- Actions: Define actions to be displayed in the menu -->
     <actions>
-        <!-- CSVダウンロードボタン -->
+        <!-- Add SlangMate menu to Tools -->
+        <group id="SlangMate.Menu"
+               text="SlangMate"
+               description="Tools for SlangMate"
+               popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </group>
+
+        <!-- Add Download CSV to SlangMate -->
         <action id="com.shinriyo.slangMate.DownloadCsvAction"
                 class="com.shinriyo.slangmate.DownloadCsvAction"
                 text="Download CSV"
                 description="Download CSV from Google Spreadsheet">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="SlangMate.Menu" anchor="last"/>
         </action>
 
-        <!-- slang コマンド実行ボタン -->
+        <!-- Run slang command button -->
         <action id="com.shinriyo.slangMate.RunSlangAction"
                 class="com.shinriyo.slangmate.RunSlangAction"
                 text="Run Slang"
                 description="Run 'fvm flutter pub run slang'">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="SlangMate.Menu" anchor="last"/>
         </action>
 
-        <!-- 設定画面を開くボタン -->
+        <!-- Open settings button -->
         <action id="com.shinriyo.slangMate.OpenSettingsAction"
                 class="com.shinriyo.slangmate.OpenSettingsAction"
-                text="Open CSV Download Settings"
+                text="Open Settings"
                 description="Open SlangMate settings">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="SlangMate.Menu" anchor="last"/>
         </action>
     </actions>
 
+
     <!-- Plugin Extension Points -->
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService 
-            serviceImplementation="com.shinriyo.slangmate.PluginSettings"
-            dynamic="true"/>
-        <applicationConfigurable 
-            instance="com.shinriyo.slangmate.SettingsConfigurable"
-            displayName="CSV Download Settings"
-            dynamic="true"/>
+        <applicationService
+                serviceImplementation="com.shinriyo.slangmate.PluginSettings"
+        />
+        <applicationConfigurable
+                instance="com.shinriyo.slangmate.SettingsConfigurable"
+                displayName="CSV Download Settings"
+                dynamic="true"/>
     </extensions>
 </idea-plugin>

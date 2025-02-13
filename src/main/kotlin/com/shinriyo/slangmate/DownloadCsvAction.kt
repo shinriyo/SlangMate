@@ -12,7 +12,6 @@ import java.net.URI
 class DownloadCsvAction : AnAction() {
     init {
         templatePresentation.apply {
-            text = "Download CSV"
             description = "Download CSV file from Google Sheets"
         }
     }
@@ -20,11 +19,11 @@ class DownloadCsvAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val project: Project = e.project ?: return
 
-        // 設定からspreadSheetIDとファイルパスを取得
+        // get spreadSheetId and filePath from settings
         val spreadSheetId = PluginSettings.getInstance().spreadSheetId
         val filePath = PluginSettings.getInstance().filePath
 
-       // spreadSheetId が空の場合、「はい」「いいえ」ダイアログを表示
+       // if spreadSheetId is blank, show "Yes" "No" dialog
        if (spreadSheetId.isBlank()) {
             val result = Messages.showYesNoDialog(
                 "Google Sheets ID が設定されていません。\n設定画面を開きますか？",
@@ -49,7 +48,7 @@ class DownloadCsvAction : AnAction() {
             if (connection.responseCode == HttpURLConnection.HTTP_OK) {
                 val csvData = connection.inputStream.bufferedReader().readText()
 
-                // プロジェクトのベースパスを取得
+                // get project base path
                 val projectBasePath = project.basePath ?: return
                 val fullFilePath = "$projectBasePath/$filePath"
 

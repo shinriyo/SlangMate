@@ -8,24 +8,28 @@ import com.intellij.openapi.components.service
 @State(name = "CsvDownloadSettings", storages = [Storage("csv_download_settings.xml")])
 class PluginSettings : PersistentStateComponent<PluginSettings.State> {
 
-    var spreadSheetId: String = ""  // デフォルトを空にする
-    var filePath: String = "lib/i18n/strings.i18n.csv"  // デフォルトの保存先
+    var spreadSheetId: String = ""  // default is empty
+    var filePath: String = "lib/i18n/strings.i18n.csv"  // default save path
+    var useFvm: Boolean = false  // use FVM or not
 
     class State {
-        var spreadSheetId: String = ""  // デフォルトを空にする
+        var spreadSheetId: String = ""  // default is empty
         var filePath: String = "lib/i18n/strings.i18n.csv"
+        var useFvm: Boolean = false  // the state of the checkbox
     }
 
     override fun getState(): State {
         return State().apply {
             spreadSheetId = this@PluginSettings.spreadSheetId
             filePath = this@PluginSettings.filePath
+            useFvm = this@PluginSettings.useFvm
         }
     }
 
     override fun loadState(state: State) {
         spreadSheetId = state.spreadSheetId
         filePath = state.filePath
+        useFvm = state.useFvm
     }
 
     companion object {

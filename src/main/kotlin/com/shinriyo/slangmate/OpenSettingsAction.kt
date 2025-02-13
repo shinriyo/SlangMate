@@ -8,7 +8,6 @@ import com.intellij.openapi.project.Project
 class OpenSettingsAction : AnAction() {
     init {
         templatePresentation.apply {
-            text = "Open Settings"
             description = "Open plugin settings"
         }
     }
