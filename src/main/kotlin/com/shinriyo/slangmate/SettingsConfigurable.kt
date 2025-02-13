@@ -59,8 +59,17 @@ class SettingsConfigurable : Configurable {
             useFvmCheckbox = JCheckBox("", settings.useFvm)  // get the state from settings
             settingsPanel!!.add(useFvmCheckbox, gbc)
 
-            gbc.gridx = 0
+            // FVMの説明を追加
+            gbc.gridx = 1
             gbc.gridy = 3
+            gbc.weightx = 1.0
+            val fvmDescription = JLabel(SlangMateBundle.message("settings.fvm.description"))
+            fvmDescription.font = fvmDescription.font.deriveFont(Font.ITALIC)
+            settingsPanel!!.add(fvmDescription, gbc)
+
+            // 残りのスペースを下部に押し出す
+            gbc.gridx = 0
+            gbc.gridy = 4
             gbc.gridwidth = 2
             gbc.weighty = 1.0
             settingsPanel!!.add(Box.createVerticalGlue(), gbc)
