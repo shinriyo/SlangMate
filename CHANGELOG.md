@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.5] - 2025-02-13
+### Added
+- Added "Open Sheet" button in settings
+- Added fvm description in settings
+### Changed
+- Improved UI layout in settings
+- Updated translations for all supported languages
+- Enhanced documentation with emojis
+
 ## [1.0.4] - 2025-02-11
 ### Added
 - Added FVM support with checkbox in settings

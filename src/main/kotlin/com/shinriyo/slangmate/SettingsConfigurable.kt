@@ -6,6 +6,7 @@ import com.intellij.openapi.ui.Messages
 import java.net.HttpURLConnection
 import java.net.URI
 import java.awt.*
+import com.intellij.ide.BrowserUtil
 
 class SettingsConfigurable : Configurable {
     private var settingsPanel: JPanel? = null
@@ -27,19 +28,32 @@ class SettingsConfigurable : Configurable {
             gbc.gridy = 0
             gbc.weightx = 0.0
             gbc.weighty = 0.0
-            settingsPanel!!.add(JLabel("Google Sheets ID:"), gbc)
+            settingsPanel!!.add(JLabel(SlangMateBundle.message("settings.spreadsheet.id")), gbc)
+
+            val idPanel = JPanel(FlowLayout(FlowLayout.LEFT, 0, 0))
+            spreadSheetIdField = JTextField(settings.spreadSheetId).apply {
+                preferredSize = Dimension(250, preferredSize.height)
+            }
+            idPanel.add(spreadSheetIdField)
+
+            val openButton = JButton(SlangMateBundle.message("settings.open.sheet")).apply {
+                addActionListener {
+                    val id = spreadSheetIdField?.text?.trim() ?: ""
+                    if (id.isNotEmpty()) {
+                        BrowserUtil.browse("https://docs.google.com/spreadsheets/d/$id")
+                    }
+                }
+            }
+            idPanel.add(openButton)
 
             gbc.gridx = 1
             gbc.weightx = 1.0
-            spreadSheetIdField = JTextField(settings.spreadSheetId).apply {
-                preferredSize = Dimension(300, preferredSize.height)
-            }
-            settingsPanel!!.add(spreadSheetIdField, gbc)
+            settingsPanel!!.add(idPanel, gbc)
 
             gbc.gridx = 0
             gbc.gridy = 1
             gbc.weightx = 0.0
-            settingsPanel!!.add(JLabel("保存先ファイルパス:"), gbc)
+            settingsPanel!!.add(JLabel(SlangMateBundle.message("settings.file.path")), gbc)
 
             gbc.gridx = 1
             gbc.weightx = 1.0
@@ -48,19 +62,28 @@ class SettingsConfigurable : Configurable {
             }
             settingsPanel!!.add(filePathField, gbc)
 
-            // 🔥 FVMのチェックボックスを追加
+            // fvm checkbox
             gbc.gridx = 0
             gbc.gridy = 2
             gbc.weightx = 0.0
-            settingsPanel!!.add(JLabel("Use FVM:"), gbc)
+            settingsPanel!!.add(JLabel(SlangMateBundle.message("settings.use.fvm")), gbc)
 
             gbc.gridx = 1
             gbc.weightx = 1.0
             useFvmCheckbox = JCheckBox("", settings.useFvm)  // get the state from settings
             settingsPanel!!.add(useFvmCheckbox, gbc)
 
-            gbc.gridx = 0
+            // fvm description
+            gbc.gridx = 1
             gbc.gridy = 3
+            gbc.weightx = 1.0
+            val fvmDescription = JLabel(SlangMateBundle.message("settings.fvm.description"))
+            fvmDescription.font = fvmDescription.font.deriveFont(Font.ITALIC)
+            settingsPanel!!.add(fvmDescription, gbc)
+
+            // push the rest of the space to the bottom
+            gbc.gridx = 0
+            gbc.gridy = 4
             gbc.gridwidth = 2
             gbc.weighty = 1.0
             settingsPanel!!.add(Box.createVerticalGlue(), gbc)
@@ -83,8 +106,8 @@ class SettingsConfigurable : Configurable {
         // check spread sheet id
         if (!isValidSpreadsheetId(newSpreadSheetId)) {
             Messages.showErrorDialog(
-                "Google Sheets ID が無効です。\n正しい ID を入力してください。",
-                "エラー: 無効な Google Sheets ID"
+                SlangMateBundle.message("error.invalid.id"),
+                SlangMateBundle.message("error.title")
             )
             return // stop saving
         }
@@ -95,9 +118,7 @@ class SettingsConfigurable : Configurable {
         settings.useFvm = newUseFvm  // save FVM settings
     }
 
-    override fun getDisplayName(): String {
-        return "CSV Download Settings"
-    }
+    override fun getDisplayName(): String = SlangMateBundle.message("settings.title")
 
     /**
      * Chedck of valid of Google Sheets ID

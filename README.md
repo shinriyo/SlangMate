@@ -1,59 +1,46 @@
-# SlangMate - IntelliJ Plugin
+# SlangMate
 
-SlangMate is an IntelliJ plugin that helps you manage and build multi-language slang packages using spreadsheet data.
+SlangMate is an IntelliJ IDEA / Android Studio plugin that helps manage Flutter localization with slang.
+
+[![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/v/26502-slangmate)](https://plugins.jetbrains.com/plugin/26502-slangmate/)
 
 ## Features
 
-- 🌏 Multi-language support
-- 📊 Import slang data from Google Spreadsheets
-- 🔧 Build and package slang data
-- 🚀 Easy integration with your projects
+- Download CSV translation data from Google Sheets
+- Run `fvm flutter pub run slang` with one click
+- Customize Google Sheets ID & save path via settings
+- Support for fvm (Flutter Version Management)
 
-## Supported Languages
+## Screenshots
 
-Currently supported:
-- 🇯🇵 Japanese
-
-Coming soon:
-- 🇺🇸 English
-- 🇨🇳 Chinese (Simplified)
-- 🇰🇷 Korean
-- And more...
+![Tools Menu](misc/tools.png)
 
 ## Installation
 
-1. Open IntelliJ IDEA settings (`Ctrl+Alt+S` / `⌘,`)
-2. Navigate to Plugins section
-3. Search for "SlangMate" in the Marketplace tab
-4. Click Install button
+Install from JetBrains Marketplace:
+[https://plugins.jetbrains.com/plugin/26502-slangmate/](https://plugins.jetbrains.com/plugin/26502-slangmate/)
 
 ## Usage
 
-1. Configure your spreadsheet connection
-2. Select target languages
-3. Build your slang package
-4. Import the generated package into your project
+1. Open `Settings → CSV Download Settings` and enter your Google Sheets ID
+2. Run "SlangMate - Download CSV" from the `Tools` menu to save the file
+3. Run "SlangMate - Run slang" from the `Tools` menu to generate localization code
 
-## Configuration
+## Supported Languages
 
-### Spreadsheet Setup
-- Ensure your spreadsheet follows the required format
-- Set up appropriate access permissions
-- Configure the connection in plugin settings
-
-### Build Configuration
-- Select source and target languages
-- Configure output format
-- Set build parameters
-
-## Development
-
-This plugin is open source. Contributions are welcome!
-
-## Feedback
-
-Please report bugs and feature requests in the [Issues](https://github.com/yourusername/slangmate/issues) section.
+- 🇺🇸 English
+- 🇯🇵 日本語 (Japanese)
+- 🇰🇷 한국어 (Korean)
+- 🇨🇳 简体中文 (Simplified Chinese)
+- 🇹🇼 繁體中文 (Traditional Chinese)
+- 🇻🇳 Tiếng Việt (Vietnamese)
+- 🇹🇭 ไทย (Thai)
+- 🇪🇸 Español (Spanish)
+- 🇮🇹 Italiano (Italian)
+- 🇳🇵 नेपाली (Nepali)
+- 🇮🇷 فارسی (Persian)
+- 🇮🇳 हिन्दी (Hindi)
 
 ## License
 
-[Apache License 2.0](LICENSE) 
+[Apache License 2.0](LICENSE)  
