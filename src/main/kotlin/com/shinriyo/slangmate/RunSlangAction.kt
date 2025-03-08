@@ -20,18 +20,6 @@ class RunSlangAction : AnAction() {
         }
     }
 
-    private fun isFlutterInPath(): Boolean {
-        return try {
-            val process = ProcessBuilder("which", FLUTTER).start()
-            val reader = BufferedReader(InputStreamReader(process.inputStream))
-            val result = reader.readLine()
-            process.waitFor()
-            !result.isNullOrBlank()
-        } catch (e: Exception) {
-            false
-        }
-    }
-
     override fun actionPerformed(e: AnActionEvent) {
         val project: Project = e.project ?: return
 
@@ -46,12 +34,13 @@ class RunSlangAction : AnAction() {
         try {
             val projectBasePath = project.basePath?.let { File(it) } ?: return
 
-            // Check if flutter is available in the system PATH
-            if (!isFlutterInPath()) {
+            // Check if flutter or fvm is available in the system PATH
+            val requiredCommand = if (useFvm) FVM else FLUTTER
+            if (!isCommandInPath(requiredCommand)) {
                 Messages.showErrorDialog(
                     project,
-                    "$FLUTTER is not in the system PATH. Please add $FLUTTER to your PATH and try again.",
-                    "$FLUTTER Not Found"
+                    "$requiredCommand is not in the system PATH. Please add $requiredCommand to your PATH and try again.",
+                    "$requiredCommand Not Found"
                 )
                 return
             }
@@ -86,6 +75,18 @@ class RunSlangAction : AnAction() {
             }
         } catch (ex: Exception) {
             Messages.showErrorDialog("An error occurred: ${ex.message}", "Error")
+        }
+    }
+
+    private fun isCommandInPath(command: String): Boolean {
+        return try {
+            val process = ProcessBuilder("which", command).start()
+            val reader = BufferedReader(InputStreamReader(process.inputStream))
+            val result = reader.readLine()
+            process.waitFor()
+            !result.isNullOrBlank()
+        } catch (e: Exception) {
+            false
         }
     }
 }
