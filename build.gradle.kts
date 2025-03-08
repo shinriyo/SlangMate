@@ -50,6 +50,13 @@ tasks {
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
+
+    runIde {
+        // add memory limit
+        jvmArgs("-Xmx2g")
+        // avoid cache related issues
+        autoReloadPlugins.set(false)
+    }
 }
 
 kotlin {
