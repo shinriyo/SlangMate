@@ -6,11 +6,29 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.io.File
 
 class RunSlangAction : AnAction() {
+    companion object {
+        private const val FVM = "fvm"
+        private const val FLUTTER = "flutter"
+    }
+
     init {
         templatePresentation.apply {
             description = "Execute slang command"
+        }
+    }
+
+    private fun isFlutterInPath(): Boolean {
+        return try {
+            val process = ProcessBuilder("which", FLUTTER).start()
+            val reader = BufferedReader(InputStreamReader(process.inputStream))
+            val result = reader.readLine()
+            process.waitFor()
+            !result.isNullOrBlank()
+        } catch (e: Exception) {
+            false
         }
     }
 
@@ -20,14 +38,26 @@ class RunSlangAction : AnAction() {
         // check if FVM is used
         val useFvm = PluginSettings.getInstance().useFvm
         val command = if (useFvm) {
-            listOf("fvm", "flutter", "pub", "run", "slang")
+            listOf(FVM, FLUTTER, "pub", "run", "slang")
         } else {
-            listOf("flutter", "pub", "run", "slang")
+            listOf(FLUTTER, "pub", "run", "slang")
         }
 
         try {
+            val projectBasePath = project.basePath?.let { File(it) } ?: return
+
+            // Check if flutter is available in the system PATH
+            if (!isFlutterInPath()) {
+                Messages.showErrorDialog(
+                    project,
+                    "$FLUTTER is not in the system PATH. Please add $FLUTTER to your PATH and try again.",
+                    "$FLUTTER Not Found"
+                )
+                return
+            }
+
             val processBuilder = ProcessBuilder(command)
-                .directory(project.basePath?.let { java.io.File(it) }) // execute in project root
+                .directory(projectBasePath) // execute in project root
                 .redirectErrorStream(true) // include standard error
 
             val process = processBuilder.start()
