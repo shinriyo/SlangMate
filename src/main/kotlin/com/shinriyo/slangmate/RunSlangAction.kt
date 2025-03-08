@@ -39,8 +39,8 @@ class RunSlangAction : AnAction() {
             if (!isCommandInPath(requiredCommand)) {
                 Messages.showErrorDialog(
                     project,
-                    "$requiredCommand is not in the system PATH. Please add $requiredCommand to your PATH and try again.",
-                    "$requiredCommand Not Found"
+                    SlangMateBundle.message("error.command.not.found", requiredCommand),
+                    SlangMateBundle.message("error.command.not.found.title", requiredCommand)
                 )
                 return
             }
@@ -64,13 +64,13 @@ class RunSlangAction : AnAction() {
             if (exitCode == 0) {
                 Messages.showInfoMessage(
                     project,
-                    "Slang execution completed successfully.\n${output}",
-                    "Success"
+                    SlangMateBundle.message("success.run", output),
+                    SlangMateBundle.message("success.title")
                 )
             } else {
                 Messages.showErrorDialog(
-                    "Slang execution failed.\nClick 'Details' to see full error output.",
-                    "Error"
+                    SlangMateBundle.message("error.run"),
+                    SlangMateBundle.message("error.title")
                 )
             }
         } catch (ex: Exception) {
