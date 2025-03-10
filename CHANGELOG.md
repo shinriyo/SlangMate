@@ -1,5 +1,12 @@
 # Changelog
 
+
+## [1.0.6] - 2025-03-08
+### Added
+- Localized unknown error message for all supported languages
+- Added error message localization for exception handling
+- Added menu icons for better visual recognition
+
 ## [1.0.5] - 2025-02-13
 ### Added
 - Added "Open Sheet" button in settings

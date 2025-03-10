@@ -1,5 +1,7 @@
 # SlangMate
 
+[English](README.md) | [日本語](docs/README_ja.md) | [한국어](docs/README_ko.md) | [简体中文](docs/README_zh-CN.md) | [繁體中文](docs/README_zh-TW.md) | [Tiếng Việt](docs/README_vi.md) | [ไทย](docs/README_th.md) | [Español](docs/README_es.md) | [Italiano](docs/README_it.md) | [नेपाली](docs/README_ne.md) | [فارسی](docs/README_fa.md) | [हिन्दी](docs/README_hi.md)
+
 SlangMate is an IntelliJ IDEA / Android Studio plugin that helps manage Flutter localization with slang.
 
 [![JetBrains Plugins](https://img.shields.io/jetbrains/plugin/v/26502-slangmate)](https://plugins.jetbrains.com/plugin/26502-slangmate/)

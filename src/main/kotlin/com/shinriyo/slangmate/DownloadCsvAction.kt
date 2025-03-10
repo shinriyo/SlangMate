@@ -12,7 +12,8 @@ import java.net.URI
 class DownloadCsvAction : AnAction() {
     init {
         templatePresentation.apply {
-            description = "Download CSV file from Google Sheets"
+            text = SlangMateBundle.message("action.download")
+            description = SlangMateBundle.message("action.download.description")
         }
     }
 
@@ -26,15 +27,16 @@ class DownloadCsvAction : AnAction() {
        // if spreadSheetId is blank, show "Yes" "No" dialog
        if (spreadSheetId.isBlank()) {
             val result = Messages.showYesNoDialog(
-                "Google Sheets ID が設定されていません。\n設定画面を開きますか？",
-                "エラー: Google Sheets ID 未設定",
-                "はい",
-                "いいえ",
+                project,
+                SlangMateBundle.message("error.no.sheet.id"),
+                SlangMateBundle.message("error.no.sheet.id.title"),
+                SlangMateBundle.message("dialog.yes"),
+                SlangMateBundle.message("dialog.no"),
                 Messages.getErrorIcon()
             )
         
             if (result == Messages.YES) {
-                ShowSettingsUtil.getInstance().showSettingsDialog(project, "CSV Download Settings")
+                ShowSettingsUtil.getInstance().showSettingsDialog(project, SlangMateBundle.message("settings.title"))
             }
             return
         }
@@ -56,13 +58,21 @@ class DownloadCsvAction : AnAction() {
                 file.parentFile.mkdirs()
                 file.writeText(csvData)
 
-                Messages.showInfoMessage("CSVファイルが保存されました: $fullFilePath", "成功")
+                Messages.showInfoMessage(
+                    SlangMateBundle.message("success.download", fullFilePath),
+                    SlangMateBundle.message("success.title")
+                )
             } else {
-                Messages.showErrorDialog("CSVダウンロードに失敗しました。\nHTTPステータス: ${connection.responseCode}",
-                    "エラー: ダウンロード失敗")
+                Messages.showErrorDialog(
+                    SlangMateBundle.message("error.download.failed", connection.responseCode),
+                    SlangMateBundle.message("error.download.failed.title")
+                )
             }
         } catch (ex: Exception) {
-            Messages.showErrorDialog("エラーが発生しました: ${ex.message}", "エラー: 例外発生")
+            Messages.showErrorDialog(
+                SlangMateBundle.message("error.exception", ex.message ?: SlangMateBundle.message("error.unknown")),
+                SlangMateBundle.message("error.exception.title")
+            )
         }
     }
 }

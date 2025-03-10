@@ -8,7 +8,8 @@ import com.intellij.openapi.project.Project
 class OpenSettingsAction : AnAction() {
     init {
         templatePresentation.apply {
-            description = "Open plugin settings"
+            text = SlangMateBundle.message("action.settings")
+            description = SlangMateBundle.message("action.settings.description")
         }
     }
 
