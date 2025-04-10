@@ -131,7 +131,7 @@ class SettingsConfigurable : Configurable {
     override fun getDisplayName(): String = SlangMateBundle.message("settings.title")
 
     /**
-     * Chedck of valid of Google Sheets ID
+     * Check of valid of Google Sheets ID
      * @return true if valid, false if invalid
      */
     private fun isValidSpreadsheetId(spreadsheetId: String): Boolean {
