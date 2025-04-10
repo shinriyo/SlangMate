@@ -113,7 +113,7 @@ class SettingsConfigurable : Configurable {
         val newFilePath = filePathField?.text?.trim() ?: ""
         val newUseFvm = useFvmCheckbox?.isSelected ?: false  // the value of the checkbox
 
-        // check spread sheet id
+        // check SpreadSheet id
         if (!isValidSpreadsheetId(newSpreadSheetId)) {
             Messages.showErrorDialog(
                 SlangMateBundle.message("error.invalid.id"),
