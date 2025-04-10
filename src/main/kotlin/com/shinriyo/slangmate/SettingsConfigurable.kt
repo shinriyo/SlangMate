@@ -68,7 +68,7 @@ class SettingsConfigurable : Configurable {
             gbc.weightx = 0.0
             val setDefaultPathButton = JButton(SlangMateBundle.message("settings.set.default.path")).apply {
                 addActionListener {
-                    filePathField?.text = "lib/i18n/strings.i18n.csv"
+                    filePathField?.text = PluginSettings.DEFAULT_FILE_PATH
                 }
             }
             settingsPanel!!.add(setDefaultPathButton, gbc)
