@@ -55,27 +55,26 @@ class SettingsConfigurable : Configurable {
             gbc.weightx = 0.0
             settingsPanel!!.add(JLabel(SlangMateBundle.message("settings.file.path")), gbc)
 
-            gbc.gridx = 1
-            gbc.weightx = 1.0
+            val pathPanel = JPanel(FlowLayout(FlowLayout.LEFT, 0, 0))
             filePathField = JTextField(settings.filePath).apply {
-                preferredSize = Dimension(300, preferredSize.height)
+                preferredSize = Dimension(250, preferredSize.height)
             }
-            settingsPanel!!.add(filePathField, gbc)
+            pathPanel.add(filePathField)
 
-            // Add button to set default file path
-            gbc.gridx = 1
-            gbc.gridy = 2
-            gbc.weightx = 0.0
             val setDefaultPathButton = JButton(SlangMateBundle.message("settings.set.default.path")).apply {
                 addActionListener {
                     filePathField?.text = PluginSettings.DEFAULT_FILE_PATH
                 }
             }
-            settingsPanel!!.add(setDefaultPathButton, gbc)
+            pathPanel.add(setDefaultPathButton)
+
+            gbc.gridx = 1
+            gbc.weightx = 1.0
+            settingsPanel!!.add(pathPanel, gbc)
 
             // fvm checkbox
             gbc.gridx = 0
-            gbc.gridy = 3
+            gbc.gridy = 2
             gbc.weightx = 0.0
             settingsPanel!!.add(JLabel(SlangMateBundle.message("settings.use.fvm")), gbc)
 
@@ -86,7 +85,7 @@ class SettingsConfigurable : Configurable {
 
             // fvm description
             gbc.gridx = 1
-            gbc.gridy = 4
+            gbc.gridy = 3
             gbc.weightx = 1.0
             val fvmDescription = JLabel(SlangMateBundle.message("settings.fvm.description"))
             fvmDescription.font = fvmDescription.font.deriveFont(Font.ITALIC)
@@ -94,7 +93,7 @@ class SettingsConfigurable : Configurable {
 
             // push the rest of the space to the bottom
             gbc.gridx = 0
-            gbc.gridy = 5
+            gbc.gridy = 4
             gbc.gridwidth = 2
             gbc.weighty = 1.0
             settingsPanel!!.add(Box.createVerticalGlue(), gbc)
