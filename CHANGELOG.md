@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.7] - 2024-04-11
+### Fixed
+- Fixed localization-related UI text display issues
+- Improved settings menu display name consistency
+- Enhanced icon resource loading reliability
 
 ## [1.0.6] - 2025-03-08
 ### Added

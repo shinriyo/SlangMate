@@ -3,7 +3,7 @@
     <id>com.shinriyo.SlangMate</id>
     <name>SlangMate</name>
     <vendor email="shinriyo@gmail.com" url="https://shinriyo.hateblo.jp/">shinriyo</vendor>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 
     <description><![CDATA[
     <strong>SlangMate</strong> is an Android Studio plugin that simplifies localization workflows by downloading translation data from Google Sheets and executing the Flutter <code>slang</code> command with a single click.<br><br>
@@ -13,11 +13,11 @@
     ✅ <strong>Customize Google Sheets ID & save path via settings</strong><br><br>
 
     🎯 <strong>How to use:</strong><br>
-    1️⃣ Open <code>Settings → CSV Download Settings</code> and enter your Google Sheets ID<br>
+    1️⃣ Open <code>Settings → SlangMate Settings</code> and enter your Google Sheets ID<br>
     2️⃣ Run <strong>"SlangMate - Download CSV"</strong> from the <code>Tools</code> menu to save the file in the specified path<br>
     3️⃣ Run <strong>"SlangMate - Run slang"</strong> from the <code>Tools</code> menu to generate localization code instantly<br><br>
 
-    📌 **Enhance your Flutter internationalization (i18n) workflow with ease!**
+    📌 <strong>Enhance your Flutter internationalization (i18n) workflow with ease!</strong><br><br>
 ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
