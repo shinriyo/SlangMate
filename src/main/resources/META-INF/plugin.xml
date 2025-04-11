@@ -28,7 +28,7 @@
         <group id="SlangMate.Menu"
                text="SlangMate"
                description="Tools for SlangMate"
-               icon="icons/slangmate.svg"
+               icon="/icons/slangmate.svg"
                popup="true">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </group>
