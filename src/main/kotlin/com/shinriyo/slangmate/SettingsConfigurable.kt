@@ -55,12 +55,22 @@ class SettingsConfigurable : Configurable {
             gbc.weightx = 0.0
             settingsPanel!!.add(JLabel(SlangMateBundle.message("settings.file.path")), gbc)
 
+            val pathPanel = JPanel(FlowLayout(FlowLayout.LEFT, 0, 0))
+            filePathField = JTextField(settings.filePath).apply {
+                preferredSize = Dimension(250, preferredSize.height)
+            }
+            pathPanel.add(filePathField)
+
+            val setDefaultPathButton = JButton(SlangMateBundle.message("settings.set.default.path")).apply {
+                addActionListener {
+                    filePathField?.text = PluginSettings.DEFAULT_FILE_PATH
+                }
+            }
+            pathPanel.add(setDefaultPathButton)
+
             gbc.gridx = 1
             gbc.weightx = 1.0
-            filePathField = JTextField(settings.filePath).apply {
-                preferredSize = Dimension(300, preferredSize.height)
-            }
-            settingsPanel!!.add(filePathField, gbc)
+            settingsPanel!!.add(pathPanel, gbc)
 
             // fvm checkbox
             gbc.gridx = 0
@@ -103,7 +113,7 @@ class SettingsConfigurable : Configurable {
         val newFilePath = filePathField?.text?.trim() ?: ""
         val newUseFvm = useFvmCheckbox?.isSelected ?: false  // the value of the checkbox
 
-        // check spread sheet id
+        // check SpreadSheet id
         if (!isValidSpreadsheetId(newSpreadSheetId)) {
             Messages.showErrorDialog(
                 SlangMateBundle.message("error.invalid.id"),
@@ -121,7 +131,7 @@ class SettingsConfigurable : Configurable {
     override fun getDisplayName(): String = SlangMateBundle.message("settings.title")
 
     /**
-     * Chedck of valid of Google Sheets ID
+     * Check of valid of Google Sheets ID
      * @return true if valid, false if invalid
      */
     private fun isValidSpreadsheetId(spreadsheetId: String): Boolean {
